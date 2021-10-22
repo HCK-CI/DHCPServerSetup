@@ -1,0 +1,9 @@
+#!/usr/bin/ash
+
+run_hook() {
+    modprobe -a e1000 e1000e virtio_pci virtio_net
+
+    bash check-net.sh
+
+    poweroff -f
+}

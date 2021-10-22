@@ -1,0 +1,32 @@
+#!/usr/bin/ash
+
+build() {
+    add_module 'e1000'
+    add_module 'e1000e'
+    add_module 'virtio_pci'
+    add_module 'virtio_net'
+
+    add_file '/etc/dhcpcd.conf'
+    add_file '/usr/lib/dhcpcd/dhcpcd-hooks/01-test'
+    add_file '/usr/lib/dhcpcd/dhcpcd-hooks/20-resolv.conf'
+    add_file '/usr/lib/dhcpcd/dhcpcd-hooks/30-hostname'
+    add_file '/usr/lib/dhcpcd/dhcpcd-run-hooks'
+    add_file '/usr/lib/libnss_dns.so.2'
+    add_file '/usr/lib/libnss_files.so.2'
+    add_file '/usr/lib/libresolv.so.2'
+
+    add_binary bash
+    add_binary dhcpcd
+
+    add_file '/data/initramfs/check-net.sh' '/usr/bin/check-net.sh'
+
+    add_runscript
+}
+
+help() {
+    cat <<HELPEOF
+This hook loads the necessary modules for a network device.
+HELPEOF
+}
+
+# vim: set ft=sh ts=4 sw=4 et:

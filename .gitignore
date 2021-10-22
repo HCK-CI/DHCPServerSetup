@@ -1,0 +1,4 @@
+test/build
+test/if_up.sh
+test/full-test.log
+test/check-test.log
