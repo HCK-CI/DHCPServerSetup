@@ -22,8 +22,7 @@ prefix="$(md5sum "${work_dir}/initramfs/check-net.sh" | cut -d' ' -f1)"
     -display none \
     -no-user-config \
     -nodefaults \
-    --enable-kvm \
-    -cpu host \
+    -cpu qemu64 \
     -m 128 \
     -netdev tap,id=mynet0,script="${work_dir}/if_up.sh",downscript=no \
     -device e1000e,netdev=mynet0,mac=56:00:05:00:dd:dd \
