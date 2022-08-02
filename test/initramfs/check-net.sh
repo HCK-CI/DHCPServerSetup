@@ -5,7 +5,7 @@ set -ex
 mkdir -p "/var/lib/dhcpcd"
 
 interfaces=( $(ip l | sed -n '/LOOPBACK/b;/^[0-9]\+/p' | awk -F ": " '{ print $2 }') )
-hosts=( 1.1.1.1 redhat.com )
+hosts=( 1.1.1.1 www.redhat.com )
 
 for netdev in "${interfaces[@]}"; do
     echo "Processing: ${netdev}"
