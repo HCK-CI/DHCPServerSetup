@@ -14,7 +14,14 @@ install_server() {
       ;;
 
     fedora)
-      dnf install -y dhcp-server
+      case "$( get_distribution_variant )" in
+        silverblue)
+          rpm-ostree install -A --allow-inactive --idempotent dhcp-server
+          ;;
+        *)
+          dnf install -y dhcp-server
+          ;;
+      esac
       systemctl enable dhcpd.service
       ;;
 

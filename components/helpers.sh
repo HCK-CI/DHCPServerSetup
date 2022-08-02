@@ -12,6 +12,16 @@ get_distribution() {
   echo "$lsb_dist" | tr '[:upper:]' '[:lower:]'
 }
 
+get_distribution_variant() {
+  variant=""
+
+  if [ -r /etc/os-release ]; then
+    variant="$(. /etc/os-release && echo "$VARIANT_ID")"
+  fi
+
+  echo "$variant" | tr '[:upper:]' '[:lower:]'
+}
+
 get_network_mask_from_prefix() {
   value=$(( 0xffffffff ^ ((1 << (32 - ${1})) - 1) ))
   echo "$(( (value >> 24) & 0xff )).$(( (value >> 16) & 0xff )).$(( (value >> 8) & 0xff )).$(( value & 0xff ))"
