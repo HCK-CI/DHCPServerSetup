@@ -56,7 +56,7 @@ check_bridge() {
 }
 
 configure_bridge_and_check() {
-  if [ $(check_bridge) ]; then
+  if check_bridge; then
     log_info "DHCP bridge already exist, configuration skipped."
     return 0
   fi
@@ -65,8 +65,8 @@ configure_bridge_and_check() {
 
   case "$lsb_dist" in
     ubuntu)
-      if $(command_exists netplan); then
-        if $(netplan get all | grep -q NetworkManager); then
+      if command_exists netplan; then
+        if netplan get all | grep -q NetworkManager; then
           create_bridge_network_manager
         else
           create_bridge_netplan
@@ -85,5 +85,5 @@ configure_bridge_and_check() {
       ;;
   esac
 
-  return $(check_bridge)
+  check_bridge
 }
